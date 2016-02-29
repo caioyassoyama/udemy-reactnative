@@ -4,6 +4,9 @@ var AppRegistry = React.AppRegistry;
 var View = React.View;
 var Text = React.Text;
 var StyleSheet = React.StyleSheet;
+var DayItem = require('./src/day-item');
+
+var DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 // Create React component
 var Weekdays = React.createClass({
@@ -12,6 +15,7 @@ var Weekdays = React.createClass({
       <Text>
         Days of the week:
       </Text>
+      <DayItem/>
     </View>
   }
 });
@@ -20,8 +24,8 @@ var Weekdays = React.createClass({
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: 'center', // Moves stuff height wise
+    alignItems: 'center' // Moves stuff width wise
   }
 });
 
