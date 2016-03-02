@@ -13,24 +13,25 @@ class StopWatch extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      startTime: null,
       timeElapsed: null
     };
   }
   render() {
     return (
       <View style={styles.container}>
-        <View style={[styles.header, this.border('yellow')]}>
-          <View style={[styles.timerWrapper, this.border('red')]}>
-            <Text>
+        <View style={styles.header}>
+          <View style={styles.timerWrapper}>
+            <Text style={styles.timer}>
               {FormatTime(this.state.timeElapsed)}
             </Text>
           </View>
-          <View style={[styles.buttonWrapper, this.border('green')]}>
+          <View style={styles.buttonWrapper}>
             {this.startStopButton()}
             {this.lapButton()}
           </View>
         </View>
-        <View style={[styles.footer, this.border('blue')]}>
+        <View style={styles.footer}>
           <Text>
             I am a list of laps
           </Text>
@@ -40,7 +41,11 @@ class StopWatch extends Component {
   }
   startStopButton() {
     return (
-      <TouchableHighlight underlayColor="gray" onPress={this.handleStartPress.bind(this)}>
+      <TouchableHighlight
+        style={[styles.button, styles.startButton]}
+        underlayColor="gray"
+        onPress={this.handleStartPress.bind(this)}
+        >
         <Text>
           Start
         </Text>
@@ -49,7 +54,7 @@ class StopWatch extends Component {
   }
   lapButton() {
     return (
-      <View>
+      <View style={styles.button}>
         <Text>
           Lap
         </Text>
@@ -57,18 +62,16 @@ class StopWatch extends Component {
     );
   }
   handleStartPress() {
-    let startTime = new Date();
+    this.setState({
+      startTime: new Date(),
+      timeElapsed: this.state.timeElapsed
+    });
     setInterval(() => {
       this.setState({
-        timeElapsed: new Date() - startTime
+        startTime: this.state.startTime,
+        timeElapsed: new Date() - this.state.startTime
       });
     }, 30);
-  }
-  border(color) {
-    return {
-      borderColor: color,
-      borderWidth: 4
-    };
   }
 }
 
@@ -93,6 +96,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center'
+  },
+  timer: {
+    fontSize: 60
+  },
+  button: {
+    borderWidth: 2,
+    height: 100,
+    width: 100,
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  startButton: {
+    borderColor: '#00CC00'
   }
 });
 
