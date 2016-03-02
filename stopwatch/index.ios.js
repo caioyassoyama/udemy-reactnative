@@ -4,7 +4,8 @@ import React, {
   Component,
   StyleSheet,
   Text,
-  View
+  View,
+  TouchableHighlight
 } from 'react-native';
 
 class StopWatch extends Component {
@@ -32,11 +33,11 @@ class StopWatch extends Component {
   }
   startStopButton() {
     return (
-      <View>
+      <TouchableHighlight underlayColor="gray" onPress={this.handleStartPress}>
         <Text>
           Start
         </Text>
-      </View>
+      </TouchableHighlight>
     );
   }
   lapButton() {
@@ -47,6 +48,9 @@ class StopWatch extends Component {
         </Text>
       </View>
     );
+  }
+  handleStartPress() {
+    console.log('Start was pressed');
   }
   border(color) {
     return {
